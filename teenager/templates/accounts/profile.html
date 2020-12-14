@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ user.username }}{% endblock %}
+{% block content %}
+
+
+    <div class="card-header panel-hed">
+        <h3>{{ user.username}}</h3>
+    </div>
+    <div class="content-section">
+        <div class="row">
+            <div class="col-4">
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            </div>
+            <div class="col-8">
+                <div class="media-body">
+                    <p><strong>User name:  </strong>{{ user.username }}</p>
+                    <p class="text-secondary">{{ user.email }}</p>
+                    <p><strong>Last login:  </strong>{{ user.last_login }}</p>
+                </div>
+            </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+
+                {{ u_form | crispy }}
+                {{ p_form | crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+
+        </form>
+            <p class="text-muted">Reset your password <a href="{% url 'password_reset' %}">Click</a></p>
+
+    </div>
+
+
+{% endblock %}

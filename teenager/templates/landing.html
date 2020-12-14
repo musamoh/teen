@@ -1,0 +1,48 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css\font-awesome\css\font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    {% block css %}{% endblock%}
+
+
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    <!-- navigation-->
+    <!--navbar -->
+
+
+    <header class="v-header container">
+      <div class="fullscreen-video-wrap">
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+          <source src="{% static 'video/Jesus.mp4' %}" type="video/mp4">
+        </video>
+      </div>
+      <div class="header-overlay"></div>
+      <div class="header-content">
+        {% block content %}
+        
+        {% endblock %}
+      </div>
+    </header>
+
+    <!--end of navbar-->
+    <!--sidebar-->
+    
+        <!--end of sidebar-->
+    {% block javascripts %}{% endblock %}
+
+  </body>
+</html>

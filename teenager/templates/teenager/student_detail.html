@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body class="bg-light">
+	<!--[if lt IE 8]>
+	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="card new">
+				<div class="card-background">
+					<img class="card-image" src="{{ object.image.url }}">
+				</div>
+				<div class="card-info">
+					<p><strong>{{ object.first_name }}</strong> {{object.last_name }} {{object.middle_name}}</p>			
+				</div>
+				<div class="profile-detail">
+					<div class="ul">
+						<a href="{% url 'update_teen' object.id %}">
+							<i class="material-icons">edit</i><span  id="text1" class="text">Edit</span>
+						</a>
+						<a href="mailto: {{object.email_address}}">
+							<i class="material-icons">email</i><span  id="text1" class="text">Email</span>
+						</a>
+					</div>		
+				</div>
+			</div>	
+		</div>		
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-header panel-hed">
+					<h3 class="panel-title">Bio <i class="fa fa_r fa-user"></i></h3>
+				</div>
+				<div class="card-body">
+					<address>
+						<strong>Date of Birth</strong><br>
+						{{object.date_of_birth|date:"M-d"}}
+					</address>
+					<address>
+						<strong>Gender</strong><br>
+						{{object.sex}}
+					</address>
+					<address>
+						<strong>State of Origin</strong><br>
+						{{object.state_of_origin}}
+					</address>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-header panel-hed">
+					<h3 class="panel-tile">Next of kin<i class="fa fa_r fa-users"></i></h3>
+				</div>
+				<div class="card-body">
+					<address>
+						<strong>Name of Parent </strong><br>
+						{{object.parent_full_name }}
+					</address>
+					<address>
+						<strong>Parent Phone Number</strong><br>
+						{{object.parent_phone_number }}
+					</address>
+					<address>
+						<strong>Step</strong><br>
+						{{object.step}} 
+					</address>
+					<address>
+						<strong>Phone</strong><br>
+						{{ object.mobile_phone }}
+					</address>
+
+					<address>
+						<strong>Birthday</strong><br>
+						{{ object.bday}}
+					</address>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="card">
+				<div class="card-header panel-hed">
+					<h3 class="panel-title">
+						Address <i class="fa fa_r fa-home"></i>
+					</h3>
+				</div>
+				<div class="card-body">
+					<address>
+						<strong>Address</strong><br>
+						{{object.address}}
+					</address>
+
+					<address>
+						<strong>Email</strong><br>
+						<a href="mailto: {{object.email_address}}">{{object.email_address}}</a>
+					</address>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-header panel-hed">
+			<h3 class="panel-title">Education <i class="fa fa_fnn fa-graduation-cap"></i><a href="{% url 'teen_school' object.id %}"><i class="material-icons fa_r">control_point</i></a></h3>
+
+		</div>
+
+		<div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordio">
+
+			{% if error_message %}
+				<p><strong>{{ error_message }}</strong></p>
+			{% endif %}
+
+			<table class="table table-striped table-hover table-bordered">
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th>Field</th>
+					<th>Degree</th>
+					<th>Grade</th>
+					<th>Started</th>
+					<th>Ended</th>
+					<th> Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for inst in object.institution_set.all %}
+					<tr>
+						<td>{{ inst.school }}</td>
+						<td>
+							 {{ inst.field_of_study }}
+						</td>
+						<td>
+								{{ inst.degree }}
+						</td>
+						<td>
+								{{ inst.grade_or_class }}
+						</td>
+						<td>
+								{{ inst.started|date:"Y" }}
+						</td>
+						<td>
+								{{ inst.ended|date:"Y" }}
+						</td>
+						<td>
+							<a role="button" href="{% url 'edit_school' object.id inst.id %}"><i class="material-icons">&#xE254;</i></a>
+							<form action="{% url 'delete_inst' object.id inst.id %}" method="post" style="display: inline;">
+								{% csrf_token %}
+								<input type="hidden" name="inst_id" value="{{ inst.id }}" />
+								<button type="submit" onclick="return confirm('Are you sure you want to delete this teens details ?');" style="border: 0; background: none; color: red;">
+						            <i class="material-icons">&#xE872;</i>
+						        </button>
+
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}

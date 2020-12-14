@@ -1,0 +1,8 @@
+def get_queryset(self):
+        return Student.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(StudentView, self).get_context_data(**kwargs)
+        context['male'] = Student.objects.all().filter(sex__iexact = "MALE")
+        # Add any other variables to the context here
+        return context

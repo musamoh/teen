@@ -1,0 +1,9 @@
+.bg-background-side {
+
+	background-color: #352ed3 !important;
+
+}
+
+.jumbo-background {
+	background-image: linear-gradient(to right, rgba(255,0,0,0), #352ed3);
+}

@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block content  %}
+ {{ form.media }}
+
+<div class="">
+  <div class="card" >
+    <div class="card-header " id="header">
+      <p><h1 class=" h1-titles">Add Teen</h1></p>
+    </div>
+    <div class="card-body">
+          <form action="." method="POST" enctype="multipart/form-data">{% csrf_token %}
+          	<div class="row">
+          		<div class="col-4">{{ form.first_name|as_crispy_field }}</div>
+          		<div class="col-4">{{ form.last_name|as_crispy_field }}</div>
+          		<div class="col-4">{{ form.middle_name|as_crispy_field }}</div>
+          	</div>
+          	<div class="row">
+          		<div class="col-4">{{ form.sex|as_crispy_field }}</div>
+              <div class="col-4">{{ form.email_address|as_crispy_field }}</div>
+          		<div class="col-4">{{ form.state_of_origin|as_crispy_field }}</div>
+          	</div>
+          	<div class="row">
+          		<div class="col-6">{{ form.date_of_birth|as_crispy_field }}</div>
+          		<div class="col-6">{{ form.phone_number|as_crispy_field }}</div>
+          	</div>
+          	<div class="row">
+          		<div class="col-6">{{ form.parent_full_name|as_crispy_field }}</div>
+          		<div class="col-6">{{ form.parent_phone_number|as_crispy_field }}</div>
+          	</div>
+          	<div class="row">
+          		<div class="col-6">{{ form.address|as_crispy_field }}</div>
+          	</div>
+
+          	<div class="row">
+          		<div class="col-6">{{ form.image|as_crispy_field }}</div>
+          	</div>
+              
+              <button type="submit" class="btn btn-success">Save Teen</button>
+          </form>
+      </div>
+  </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,47 @@
+
+<!-- a view that displays the admin users -->
+{% extends 'base_dasboard.html' %}
+
+
+
+{% block content %}
+
+<div class="card-header main-color-bg">
+  <h3>Admin users</h3>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"><i class="fa fa-users"></i></th>
+      <th scope="col">User Name.</th>
+      <th scope="col">Email</th>
+      <th scope="col">Group</th>
+      <th scope="col">Last login</th>
+    </tr>
+  </thead>
+<!-- loops through the admin objects and displays the username, email and group-->
+  {% for user in object_list %}
+      <tbody>
+        <tr>
+          <th scope="row"><i class="fa fa-star" aria-hidden="true"></i></a></th>
+          <td>{{user.username }}</td>
+          <td>{{ user.email}}</td>
+
+          <td>
+
+         {% for group in user.groups.all %} 
+
+          <p>{{ group }}</p>
+
+          {% endfor%}
+        </td>
+
+
+          <td>{{ user.last_login }}</td>
+
+        </tr>
+      </tbody>
+  {% endfor %}
+</table>
+
+{% endblock %}
